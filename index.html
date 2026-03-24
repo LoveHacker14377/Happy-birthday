@@ -16,8 +16,8 @@
             --primary-color: #ff3879;
             --secondary-color: #ff74a4;
             --accent-glow: rgba(255, 100, 150, 0.6);
-            --card-bg: rgba(255, 150, 200, 0.1);
-            --card-border: rgba(255, 200, 220, 0.25);
+            --card-bg: rgba(255, 150, 200, 0.15);
+            --card-border: rgba(255, 200, 220, 0.3);
             --text-light: #fce7f3;
         }
 
@@ -38,7 +38,7 @@
                         radial-gradient(at 85% 20%, hsla(300, 70%, 70%, .3) 0px, transparent 60%),
                         radial-gradient(at 20% 85%, hsla(350, 90%, 80%, .3) 0px, transparent 60%);
             background-size: 200% 200%;
-            animation: aurora-flow 20s infinite alternate linear;
+            animation: aurora-flow 15s infinite alternate ease-in-out;
         }
 
         @keyframes aurora-flow {
@@ -49,18 +49,19 @@
         .step {
             position: absolute;
             top: 50%; left: 50%;
-            width: 90%; max-width: 500px;
+            width: 90%; max-width: 450px;
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--card-border);
-            border-radius: 2rem;
-            padding: 2.5rem;
-            transform: translate(-50%, -50%) scale(0.9);
+            border-radius: 2.5rem;
+            padding: 3rem 2rem;
+            transform: translate(-50%, -50%) scale(0.8);
             opacity: 0;
             pointer-events: none;
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 10;
             text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .step.active {
@@ -71,27 +72,32 @@
 
         .btn {
             background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-            padding: 0.8rem 2.5rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
-            font-weight: bold;
-            box-shadow: 0 4px 20px var(--accent-glow);
-            transition: 0.3s;
+            font-weight: 800;
+            box-shadow: 0 10px 20px rgba(255, 56, 121, 0.3);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
+            letter-spacing: 1px;
             display: inline-block;
             cursor: pointer;
+            border: none;
+            color: white;
         }
 
-        .btn:hover { transform: translateY(-3px) scale(1.05); }
+        .btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 30px var(--accent-glow); }
 
         .text-gradient {
             font-family: 'Playfair Display', serif;
-            background: linear-gradient(to right, #ffc2e2, #ffffff);
+            background: linear-gradient(to right, #ffc2e2, #ffffff, #ffc2e2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: 700;
         }
 
-        .heart-beat { animation: heartbeat 1.5s infinite; }
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .heart-beat { animation: heartbeat 1.2s infinite ease-in-out; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
 
         #canvas-container { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
     </style>
@@ -102,40 +108,34 @@
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
     <audio id="click-sfx"><source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
-    <audio id="success-sfx"><source src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
 
     <div id="aurora-background"></div>
     <div id="canvas-container"></div>
 
     <main id="app">
         <div id="step1" class="step active">
-            <div class="text-6xl mb-4 heart-beat">❤️</div>
-            <h1 class="text-4xl font-bold text-gradient mb-4">Hello, My Darling.</h1>
-            <p class="text-pink-100 mb-8">Every beat of my heart whispers your name, <b>Ashwini</b>.</p>
-            <div id="start-btn" class="btn text-white">Unwrap My Feelings</div>
+            <div class="text-7xl mb-6 heart-beat">❤️</div>
+            <h1 class="text-gradient mb-4">Hello, My Darling.</h1>
+            <p class="text-pink-100 text-lg mb-10">Every beat of my heart whispers your name, <b>Ashwini</b>.</p>
+            <button id="start-btn" class="btn">Unwrap My Feelings</button>
         </div>
 
         <div id="step2" class="step">
-            <div class="text-6xl mb-4">🎂</div>
-            <h2 class="text-3xl font-bold text-gradient mb-4">Happy Birthday, Ashwini!</h2>
-            <p class="mb-8">To the woman who makes my life beautiful. You are my world.</p>
-            <div id="next-btn-2" class="btn text-white">Why I Love You...</div>
+            <div class="text-7xl mb-6">🎁</div>
+            <h2 class="text-gradient mb-4">It's a Special Day!</h2>
+            <p class="text-lg mb-10">Today, the most beautiful soul was born. My world, My Everything.</p>
+            <button id="next-btn-2" class="btn">Click to See...</button>
         </div>
 
         <div id="step3" class="step">
-            <h2 class="text-2xl font-bold text-pink-300 mb-4">You Are Special ✨</h2>
-            <div class="text-left space-y-4 mb-6">
-                <p><b>💖 Your Smile:</b> It lights up my darkest days.</p>
-                <p><b>✨ Your Soul:</b> Pure and kind, it inspires me.</p>
+            <div class="text-7xl mb-6">🎂</div>
+            <h2 class="text-gradient mb-2">Happy Birthday, Ashwini!</h2>
+            <p class="text-pink-200 text-xl font-bold mb-8 italic">"Happy Birthday, My Darling!"</p>
+            <button id="celebrate-btn" class="btn">Celebrate Us! 💖</button>
+            <div id="final-wish" class="mt-8 opacity-0 transition-all duration-1000">
+                <p class="text-2xl font-bold text-white mb-2">I Love You Forever! 💍</p>
+                <p class="text-pink-300">You are my Queen. 👑</p>
             </div>
-            <div id="next-btn-3" class="btn text-white">One More Thing</div>
-        </div>
-
-        <div id="step4" class="step">
-            <h2 class="text-3xl font-bold text-gradient mb-6">Final Surprise</h2>
-            <p class="mb-8">Ashwini, I promise to stand by you forever. ❤️</p>
-            <div id="confetti-btn" class="btn text-white">Celebrate Us!</div>
-            <p id="final-wish" class="mt-6 opacity-0 text-xl font-bold text-pink-400">Happy Birthday, My Queen! 👑</p>
         </div>
     </main>
 
@@ -143,7 +143,15 @@
         let scene, camera, renderer, hearts = [];
         const bgMusic = document.getElementById('bg-music');
         const clickSfx = document.getElementById('click-sfx');
-        const successSfx = document.getElementById('success-sfx');
+
+        // Function to play "Happy Birthday Darling" voice
+        function speakWish() {
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = "Happy Birthday, My Darling Ashwini!";
+            msg.rate = 0.9; // Normal speed
+            msg.pitch = 1.2; // Slightly sweet tone
+            window.speechSynthesis.speak(msg);
+        }
 
         function playClick() { clickSfx.currentTime = 0; clickSfx.play(); }
 
@@ -153,7 +161,7 @@
             camera.position.z = 30;
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(window.devicePixelRatio);
             document.getElementById('canvas-container').appendChild(renderer.domElement);
 
             const heartShape = new THREE.Shape();
@@ -166,12 +174,12 @@
             heartShape.bezierCurveTo(35, 0, 25, 25, 25, 25);
 
             const geometry = new THREE.ExtrudeGeometry(heartShape, { depth: 2, bevelEnabled: true, bevelSize: 1 });
-            const colors = [0xff3879, 0xff74a4, 0xfc94af];
+            const colors = [0xff3879, 0xff74a4, 0xffc0cb];
 
-            for(let i=0; i<30; i++) {
+            for(let i=0; i<25; i++) {
                 const material = new THREE.MeshPhongMaterial({ color: colors[i%3], shininess: 100 });
                 const heart = new THREE.Mesh(geometry, material);
-                heart.scale.set(0.04, 0.04, 0.04);
+                heart.scale.set(0.045, 0.045, 0.045);
                 heart.position.set((Math.random()-0.5)*80, (Math.random()-0.5)*80, (Math.random()-0.5)*20);
                 heart.userData = { speed: Math.random() * 0.02 + 0.01 };
                 hearts.push(heart);
@@ -198,19 +206,35 @@
             document.getElementById('step'+n).classList.add('active');
         }
 
-        // Listeners
+        // Navigation Listeners
         document.getElementById('start-btn').onclick = () => {
             playClick();
-            bgMusic.volume = 0.3;
-            bgMusic.play().catch(() => console.log("Music blocked by browser policy"));
+            bgMusic.volume = 0.2;
+            bgMusic.play().catch(() => {});
             showStep(2);
         };
-        document.getElementById('next-btn-2').onclick = () => { playClick(); showStep(3); };
-        document.getElementById('next-btn-3').onclick = () => { playClick(); showStep(4); };
-        document.getElementById('confetti-btn').onclick = () => {
-            successSfx.play();
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            gsap.to('#final-wish', { opacity: 1, scale: 1.2, duration: 1 });
+
+        document.getElementById('next-btn-2').onclick = () => {
+            playClick();
+            showStep(3);
+        };
+
+        document.getElementById('celebrate-btn').onclick = () => {
+            // Voice Wish
+            speakWish();
+            
+            // Confetti
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#ff3879', '#ffffff', '#ff74a4'] });
+            
+            // Show Final Text
+            const finalDiv = document.getElementById('final-wish');
+            finalDiv.style.opacity = '1';
+            finalDiv.style.transform = 'translateY(-10px)';
+            
+            // Extra Fun: Burst Confetti again after 1 second
+            setTimeout(() => {
+                confetti({ particleCount: 100, spread: 100, origin: { y: 0.7 } });
+            }, 1000);
         };
 
         window.addEventListener('resize', () => {
@@ -222,5 +246,4 @@
         initThreeJS();
     </script>
 </body>
-    </html>
-    
+</html>
