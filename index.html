@@ -4,30 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Gayatri | A Special Wish</title>
+    <title>For Gayatri | My ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&f[]=playfair-display@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d020d;
+            --bg-color: #0f0510;
             --primary-pink: #ff3879;
             --accent-purple: #7000ff;
-            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-bg: rgba(255, 255, 255, 0.04);
             --card-border: rgba(255, 255, 255, 0.1);
         }
 
         body { font-family: 'Satoshi', sans-serif; background-color: var(--bg-color); color: #fff; overflow: hidden; }
-        #app { display: grid; place-items: center; height: 100vh; position: relative; z-index: 2; }
+        
+        #aurora-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.5;
+            background: radial-gradient(at 10% 20%, hsla(330, 100%, 40%, .2) 0px, transparent 50%),
+                        radial-gradient(at 90% 80%, hsla(280, 80%, 30%, .2) 0px, transparent 50%);
+        }
+
+        #app { display: grid; place-items: center; height: 100vh; position: relative; z-index: 2; padding: 1rem; }
         
         .step {
-            position: absolute; top: 50%; left: 50%; width: 90%; max-width: 550px;
-            background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--card-border);
+            position: absolute; top: 50%; left: 50%; width: 95%; max-width: 550px;
+            background: var(--card-bg); backdrop-filter: blur(30px); border: 1px solid var(--card-border);
             opacity: 0; transform: translate(-50%, -50%) scale(0.9);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none;
-            border-radius: 2.5rem; padding: 3rem 2rem; text-align: center;
+            border-radius: 2.5rem; padding: 3rem 1.5rem; text-align: center;
         }
 
         .step.active { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: all; }
@@ -35,9 +44,9 @@
 
         .btn {
             background: linear-gradient(90deg, var(--primary-pink), var(--accent-purple));
-            padding: 1rem 3rem; border-radius: 50px; font-weight: 700;
+            padding: 1rem 2.5rem; border-radius: 50px; font-weight: 700;
             box-shadow: 0 10px 30px rgba(255, 56, 121, 0.3); transition: 0.4s;
-            text-transform: uppercase; letter-spacing: 2px;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;
         }
         .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255, 56, 121, 0.5); }
 
@@ -47,64 +56,76 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        #final-wish-container { position: relative; overflow: hidden; height: 120px; }
-        .final-msg { 
-            font-size: 2.5rem; font-weight: 800; line-height: 1.2;
-            filter: drop-shadow(0 0 15px rgba(255, 56, 121, 0.6));
-        }
-        
         #polaroid-box {
-            background: white; padding: 1rem 1rem 3.5rem 1rem;
+            background: white; padding: 0.8rem 0.8rem 2.5rem 0.8rem;
             box-shadow: 0 15px 45px rgba(0,0,0,0.7); transform: rotate(-3deg);
-            margin: 1.5rem auto; width: 240px;
+            margin: 1.5rem auto; width: 220px;
         }
+
+        #progress-bar { background: linear-gradient(90deg, #ff3879, #7000ff); transition: width 0.6s; }
     </style>
 </head>
 
 <body>
+    <div id="aurora-bg"></div>
     <div id="canvas-container" style="position: fixed; top: 0; left: 0; z-index: 1;"></div>
 
     <div id="app">
+        <div class="fixed top-8 left-1/2 -translate-x-1/2 w-3/4 max-w-sm h-1 bg-white/5 rounded-full z-20">
+            <div id="progress-bar" class="h-full w-0 rounded-full"></div>
+        </div>
+
         <main id="step-container">
             <div id="step1" class="step active">
                 <div class="anim-child text-6xl mb-6">🕯️</div>
                 <h1 class="anim-child text-4xl font-bold text-gradient mb-4">Hello, Gayatri.</h1>
-                <p class="anim-child text-gray-400 mb-8">A silent wish from someone who never forgot.</p>
-                <button onclick="go(2)" class="anim-child btn text-white">Enter</button>
+                <p class="anim-child text-gray-400 mb-8">Some memories never fade. I have a small message for you.</p>
+                <button onclick="go(2)" class="anim-child btn text-white">Open</button>
             </div>
 
             <div id="step2" class="step">
+                <div class="anim-child text-6xl mb-4">🎂</div>
                 <h2 class="anim-child text-4xl font-bold text-gradient mb-4">Happy Birthday, Darling.</h2>
-                <p class="anim-child text-gray-300 mb-8">May this year bring you all the peace and joy you deserve in your new life.</p>
+                <p class="anim-child text-gray-300 mb-8 leading-relaxed">Wishing you a beautiful year ahead. May your path always be lit with joy and peace.</p>
                 <button onclick="go(3)" class="anim-child btn text-white">Next</button>
             </div>
 
             <div id="step3" class="step">
-                <h2 class="anim-child text-3xl font-bold text-gradient mb-6">Always Respected</h2>
-                <p class="anim-child text-gray-400 italic mb-8">"True love isn't about possession, it's about wanting you to be happy—wherever you are."</p>
+                <h2 class="anim-child text-3xl font-bold text-gradient mb-6">With Deepest Respect</h2>
+                <div class="anim-child space-y-4 text-gray-400 italic mb-8">
+                    <p>"True love means wanting your happiness above everything else."</p>
+                    <p>"I'm always wishing the best for you, wherever you are."</p>
+                </div>
                 <button onclick="go(4)" class="anim-child btn text-white">A Memory</button>
             </div>
 
             <div id="step4" class="step">
+                <h2 class="anim-child text-2xl font-bold text-gradient mb-4">Forever Precious</h2>
                 <div id="polaroid-box" class="anim-child">
                     <img src="https://static.vecteezy.com/system/resources/previews/036/619/697/non_2x/ai-generated-couple-of-lovers-in-cartoon-style-on-transparent-background-png.png" class="w-full h-48 object-cover">
-                    <p class="text-black font-serif mt-4 text-lg text-center">Forever Precious</p>
+                    <p class="text-black font-serif mt-4 text-lg text-center">In My Heart</p>
                 </div>
-                <button onclick="go(5)" class="anim-child btn text-white mt-4">The Final Wish</button>
+                <button onclick="go(5)" class="anim-child btn text-white mt-4">The Last Wish</button>
             </div>
 
             <div id="step5" class="step">
-                <div class="anim-child text-7xl mb-4">✨</div>
-                <h2 class="anim-child text-2xl font-medium text-pink-200 mb-2 uppercase tracking-widest">To My Darling Gayatri</h2>
+                <div class="anim-child text-7xl mb-6">💎</div>
                 
-                <div id="final-wish-container" class="anim-child flex flex-col justify-center items-center">
-                    <p id="wish-text" class="final-msg text-gradient opacity-0">Happy Birthday,<br>My ❤️</p>
+                <div class="anim-child flex flex-col justify-center items-center py-4">
+                    <h2 id="wish-text" class="text-gradient text-4xl md:text-5xl font-extrabold leading-tight">
+                        Happy Birthday,<br>My ❤️
+                    </h2>
                 </div>
 
-                <p class="anim-child text-gray-400 mb-8 mt-4 text-sm italic">"May your smile never fade. Always wishing you the best."</p>
+                <p class="anim-child text-gray-300 mb-8 mt-6 text-lg">
+                    Have a beautiful life, Gayatri.
+                </p>
                 
-                <button id="celebrate-btn" class="anim-child btn text-white">Celebrate Us One Last Time</button>
-                <p class="anim-child mt-6 text-[10px] uppercase tracking-widest text-gray-600">Always Yours.</p>
+                <button id="celebrate-btn" class="anim-child btn text-white">Celebrate Your Day</button>
+                
+                <div class="anim-child mt-10">
+                    <p class="text-[12px] uppercase tracking-[0.3em] text-pink-400/60 font-bold">Always Yours.</p>
+                </div>
             </div>
         </main>
     </div>
@@ -115,10 +136,10 @@
             const next = document.getElementById(`step${n}`);
             next.classList.add('active');
             gsap.fromTo(next.querySelectorAll('.anim-child'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 });
+            document.getElementById('progress-bar').style.width = `${(n - 1) / 4 * 100}%`;
         }
 
         document.getElementById('celebrate-btn').onclick = function() {
-            // Heart-shaped confetti burst
             const duration = 5 * 1000;
             const animationEnd = Date.now() + duration;
             const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -129,17 +150,18 @@
                 const timeLeft = animationEnd - Date.now();
                 if (timeLeft <= 0) return clearInterval(interval);
                 const particleCount = 50 * (timeLeft / duration);
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                // Red and Pink heart colors
+                confetti(Object.assign({}, defaults, { particleCount, colors:['#ff3879', '#ff0000', '#ffffff'], origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, colors:['#ff3879', '#ff0000', '#ffffff'], origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
 
-            gsap.to('#wish-text', { opacity: 1, scale: 1.2, duration: 1.5, ease: "elastic.out(1, 0.3)" });
+            gsap.to('#wish-text', { scale: 1.1, duration: 1, repeat: -1, yoyo: true });
             this.innerText = "Sent with Love";
-            this.style.opacity = "0.5";
             this.disabled = true;
+            this.style.opacity = "0.7";
         };
 
-        // Three.js Background
+        // Elegant Background Particles
         let scene = new THREE.Scene(),
             camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000),
             renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
@@ -148,8 +170,8 @@
         camera.position.z = 30;
 
         let stars = [];
-        for(let i=0; i<150; i++) {
-            let p = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshBasicMaterial({color: 0xff3879}));
+        for(let i=0; i<100; i++) {
+            let p = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), new THREE.MeshBasicMaterial({color: 0xff3879, transparent:true, opacity:0.6}));
             p.position.set(Math.random()*80-40, Math.random()*80-40, Math.random()*40-20);
             scene.add(p);
             stars.push(p);
@@ -160,8 +182,14 @@
             renderer.render(scene, camera);
         }
         animate();
+
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
         
-        // Initial animation
+        // Start animation
         window.onload = () => { gsap.to('#step1 .anim-child', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 }); };
     </script>
 </body>
